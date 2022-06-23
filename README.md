@@ -88,3 +88,8 @@ To stop docker container
 ```
 docker strop <container_id>
 ```
+
+
+```
+python setup.py install
+```
