@@ -1,3 +1,4 @@
+from tkinter import E
 from housing.entity.config_entity import DataIngestionConfig, DataTransformationConfig, DataValidationConfig, ModelEvaluationConfig, ModelPusherConfig, ModelTrainerConfig, TrainingPipelineConfig
 from housing.util.util import read_yaml_file
 from housing.constant import *
@@ -9,9 +10,12 @@ class Configuration:
     
     def __init__(self,config_fie_path:str=CONFIG_FILE_PATH,
                  current_time_stamp:str=CURRENT_TIME_STAMP) -> None:
-        self.config_info = read_yaml_file(file_path=config_fie_path)
-        self.training_pipeline_config = self.get_training_pipeline_config()
-        self.time_stamp = CURRENT_TIME_STAMP
+        try:
+            self.config_info = read_yaml_file(file_path=config_fie_path)
+            self.training_pipeline_config = self.get_training_pipeline_config()
+            self.time_stamp = CURRENT_TIME_STAMP
+        except Exception as e:
+            raise HousingException(e,sys) from E
             
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         try:
