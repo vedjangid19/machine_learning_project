@@ -15,7 +15,7 @@ class Configuration:
             self.training_pipeline_config = self.get_training_pipeline_config()
             self.time_stamp = CURRENT_TIME_STAMP
         except Exception as e:
-            raise HousingException(e,sys) from E
+            raise HousingException(e,sys) from e
             
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         try:
@@ -28,14 +28,14 @@ class Configuration:
             
             data_ingestion_info = self.config_info[DATA_INGESTION_CONFIG_KEY]
             
-            dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY], 
+            dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
             
             tgz_download_dir = os.path.join(
                 data_ingestion_artifact_dir,
                 data_ingestion_info[DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY]
                 )
             
-            raw_dataset_dir = os.path.join(
+            raw_data_dir = os.path.join(
                 data_ingestion_artifact_dir,
                 data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY] 
                 )
@@ -58,11 +58,11 @@ class Configuration:
             data_ingestion_config = DataIngestionConfig(
                 dataset_download_url = dataset_download_url, 
                 tgz_download_dir = tgz_download_dir, 
-                raw_dataset_dir = raw_dataset_dir, 
+                raw_data_dir = raw_data_dir, 
                 ingested_train_dir = ingested_train_dir, 
                 ingested_test_dir = ingested_test_dir
             )
-            
+           
             logging.info(f"Data Ingestion Config : {data_ingestion_config}")
             return data_ingestion_config
         

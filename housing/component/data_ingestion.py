@@ -22,7 +22,8 @@ class DataIngestion:
     def download_housing_data(self)-> str:
         try:
             #extract remote url to download dataset
-            download_url = self.data_ingestion_config.tgz_download_dir
+
+            download_url = self.data_ingestion_config.dataset_download_url
             
             #folder location to download file
             tgz_download_dir = self.data_ingestion_config.tgz_download_dir
@@ -33,6 +34,7 @@ class DataIngestion:
             os.makedirs(tgz_download_dir,exist_ok=True)
             
             housing_file_name = os.path.basename(download_url)
+            # print("Download url :",download_url)
             
             tgz_file_path = os.path.join(tgz_download_dir,housing_file_name)
             
@@ -46,7 +48,7 @@ class DataIngestion:
     
     def extract_tgz_file(self,tgz_file_path:str):
         try:
-            raw_data_dir = self.data_ingestion_config.raw_dataset_dir
+            raw_data_dir = self.data_ingestion_config.raw_data_dir
             
             if os.path.exists(raw_data_dir):
                 os.remove(raw_data_dir)
@@ -73,7 +75,7 @@ class DataIngestion:
             housing_data_frame = pd.read_csv(housing_file_path)
             
             housing_data_frame["income_cat"] = pd.cut(
-                housing_data_frame,
+                housing_data_frame["median_income"],
                 bins=[0.0,1.5,3.0,4.5,6.0,np.inf],
                 labels=[1,2,3,4,5]
                 )
@@ -118,3 +120,7 @@ class DataIngestion:
             return self.split_data_as_train_test()
         except Exception as e:
             raise HousingException(e,sys) from e
+        
+    
+    def __del__(self):
+        logging.info(f"{'='*20}Data Ingestion log completed.{'='*20} \n\n")
