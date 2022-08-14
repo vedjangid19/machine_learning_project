@@ -32,7 +32,7 @@ class HousingEstimatorModel:
         return self.trained_model_object.predict(transformed_feature)
     
     def __repr__(self):
-        return f"{type(self.trained_model_object).__name_}()"
+        return f"{type(self.trained_model_object).__name__}()"
     
     def __str__(self):
         return f"{type(self.trained_model_object).__name__}()"
