@@ -148,7 +148,7 @@ def predict():
     return render_template("predict.html", context=context)
 
 
-@app.route('/saved_model', defaults={'req_path':'saved_models'})
+@app.route('/saved_models', defaults={'req_path':'saved_models'})
 @app.route('/saved_models/<path:req_path>')
 def saved_models_dir(req_path):
     os.makedirs("saved_models", exist_ok=True)
