@@ -257,7 +257,7 @@ class DataTransformation:
             logging.info(f"Saving preprocessing object.")
             save_object(file_path=preprocessed_object_file_path,obj=preprocessing_obj)
 
-            data_tarnsformation_artifact = DataTransformationArtifact(
+            data_transformation_artifact = DataTransformationArtifact(
                 is_transformed=True,
                 message="Data Transformation Successfull.",
                 transformed_train_file_path=transformed_train_file_path,
@@ -265,8 +265,8 @@ class DataTransformation:
                 preprocessed_object_file_path=preprocessed_object_file_path
             )
             
-            logging.info(f"Data Transformation Artifact : {data_tarnsformation_artifact}")
-            return data_tarnsformation_artifact 
+            logging.info(f"Data Transformation Artifact : {data_transformation_artifact}")
+            return data_transformation_artifact 
         except Exception as e:
             raise HousingException(e,sys) from e 
         

@@ -6,4 +6,5 @@ sklearn
 pyYAML
 evidently
 dill
+matplotlib
 -e .
